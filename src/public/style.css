@@ -13,3 +13,7 @@ html, body {
     height: 400px;
     text-align: center;
 }
+
+.padded {
+    margin: 25px 25px 25px 25px;
+}

@@ -2,13 +2,14 @@ const { Client } = require('pg');
 
 // config ==============================
 const config = {
-  connectionString: 'postgres://dylanpowers:@localhost:5432/dylanpowers'
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
 };
 
 const client = new Client(config);
 client.connect((err) => {
   if (err) {
-    console.log(err);
+    console.error(err);
     throw err;
   } else {
     console.log('Db connection succeeded');

@@ -31,6 +31,35 @@ app.post('/participants/add', (req, res) => {
   });
 });
 
+/**
+ * Count how many participants are currently active in the system.
+ */
+app.get('/participants/count', (req, res) => {
+  mm.countParticipants((err, response) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Something went wrong on our end');
+    } else {
+      res.status(200).send(response);
+    }
+  });
+});
+
+/**
+ * Get a match for a given participant
+ */
+app.get('/participants/match', (req, res) => {
+  let name = req.query.name;
+  console.log(req.query.name);
+  try {
+    mm.getMatch(name, (match) => {
+      res.status(200).send(match);
+    });
+  } catch (err) {
+    res.status(500).send('Something went wrong on our end');
+  }
+});
+
 // confirmation page
 app.get('/confirmation', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'confirmation.html'));
